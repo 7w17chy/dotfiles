@@ -1,0 +1,5 @@
+# symlink all config files (t means `target directory`)
+stow -t ~ *
+
+# renew symlinks
+stow -R -t ~ *

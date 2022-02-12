@@ -1,0 +1,262 @@
+#+title: Emacs Configuration
+* Suggestions
+  - [x] [[https://www.emacswiki.org/emacs/MoveText][MoveText]]: <M-up> and <M-down> move the cursor's line up/down a line
+  - [ ] [[https://www.emacswiki.org/emacs/InteractivelyDoThings][ido-mode]]: 'Interactively do things'; search suggestions etc
+  - [x] Change the mapping <C-x o> to <C-,>, for more convenience
+  - [x] use package-require
+  - [ ] initially fold all stichpunkte
+* Personal information
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name    "Max Nerius"
+      user-mail-address "mnerius@gmx.de")
+#+END_SRC
+* Enable melpa
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+;; Any add to list for package-archives (to add marmalade or melpa) goes here
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(base16-theme evil)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+#+END_SRC
+* use-package
+** Enable
+   #+begin_src emacs-lisp
+   (require 'use-package-ensure)
+   (setq use-package-always-ensure t)
+   #+end_src
+** Always compile packages + use newest available version
+   #+begin_src emacs-lisp
+   (use-package auto-compile
+                :config (auto-compile-on-load-mode))
+   (setq load-prefer-newer t)
+   #+end_src
+* General stuff
+** which-key: Show possible completions for unfinished commands
+   #+BEGIN_SRC emacs-lisp
+   (use-package which-key
+     :config
+     (which-key-mode 1))
+   #+END_SRC
+* Style
+** Disable the menubar
+   order matters: by putting 'tool-bar-mode 0' before 'menu-bar-mode 0', a black box
+   appears instead of the scroll bar.
+   #+BEGIN_SRC emacs-lisp
+   (menu-bar-mode 0)
+   #+END_SRC
+** Disable the toolbar
+ #+BEGIN_SRC emacs-lisp
+ (tool-bar-mode 0)
+ #+END_SRC
+** Set line numbers to be relative to the current line
+ #+BEGIN_SRC emacs-lisp
+ (setq-default display-line-numbers 'relative)
+ #+END_SRC
+** Disable the scrollbar
+ #+BEGIN_SRC emacs-lisp
+ (toggle-scroll-bar 0)
+ #+END_SRC
+** Set a nice font
+ #+BEGIN_SRC emacs-lisp
+ ;; set default font
+ ;;(set-frame-font "Hack 10")
+ ;;(set-frame-font "Fira Code 10")
+ ;;(set-frame-font "DejaVu Sans Mono 10")
+ (set-frame-font "Office Code Pro 10") ;that one's pretty good!
+ ;;(set-frame-font "Fantasque Sans Mono 11")
+ ;;(set-frame-font "Liberation Mono 10")
+ ;;(set-frame-font "Source Code Pro 11")
+ ;;(set-frame-font "Input Mono Narrow 10")
+ ;;(set-frame-font "Hack Nerd Font 10")
+ ;;(set-frame-font "Iosevka 11")
+ ;;(set-frame-font "Ubuntu Mono 12")
+ ;(set-frame-font "Noto Sans Mono 10")
+ #+END_SRC
+** Theme
+   #+BEGIN_SRC emacs-lisp
+     ;;(load-theme 'base16-espresso t)
+   (use-package gruber-darker-theme
+     :config
+     (load-theme 'gruber-darker t))
+   ;(load-theme 'solarized-light t)
+   #+END_SRC
+** Always make interactive buffers appear horizontally 
+   Credit: https://stackoverflow.com/questions/21542914/make-buffer-list-always-appear-in-horizontal-split ("phils")
+   #+begin_src emacs-lisp
+   (setq split-width-threshold nil)
+   (setq split-height-threshold 0)
+   #+end_src
+** Open a scratch buffer on startup (if no other file has been specified)
+   Source/credit: [[https://www.reddit.com/r/emacs/comments/cbkmde/open_an_empty_filescratch_buffer_by_default_on/][Post on Reddit (/r/emacs) by /u/mclearc]]  
+   #+begin_src emacs-lisp
+   (setq-default inhibit-startup-screen t)
+   ;(setq inhibit-splash-screen t)
+   ;(setq inhibit-startup-message t)
+   ;(setq initial-scratch-message "")
+   #+end_src
+   - for quick startup do:
+     #+begin_src emacs-lisp
+     ;(setq initial-major-mode 'fundamental-mode)
+     #+end_src
+*** inital scratch-buffer major mode
+    #+begin_src emacs-lisp
+    (setq initial-major-mode 'org-mode)
+    #+end_src
+*** inital message displayed in the scratch buffer on startup
+    #+begin_src emacs-lisp
+    (setq initial-scratch-message "\
+#+title: Titel
+#+author: Max Nerius
+#+date: \\today")
+    #+end_src
+* Org stuff
+** When closing a task, note date and time of closing
+   #+BEGIN_SRC emacs-lisp
+   (setq org-log-done 'time)
+   #+END_SRC
+** Put all org files in one directory
+   #+begin_src emacs-lisp
+   (custom-set-variables
+    '(org-directory "~/Dropbox/orgfiles/")
+    '(org-agenda-files (list org-directory)))
+   #+end_src
+** Org-capture
+*** set default notes file for org-capture
+    #+begin_src emacs-lisp
+    ; should use org-directory instead of an absolute path
+    (setq org-default-notes-file (concat org-directory "notes.org"))
+    #+end_src
+*** capture templates
+    #+begin_src emacs-lisp
+    (setq org-capture-templates
+          '(("t" "Todo" entry (file "agenda.org")
+             "* TODO %?\n %i\n")
+            ("c" "Media recommendation" entry (file "recom.org")
+             "* %?\n %i\n")
+            ("z" "Quote" entry (file "quotes.org")
+             "* %?\n %i\n")
+            ("i" "Idee" entry (file "ideen.org")
+             "* %?\n %i\n")))
+    #+end_src
+** Auto-save org buffers to disk
+   #+begin_src emacs-lisp
+   (add-hook 'auto-save-hook 'org-save-all-org-buffers)
+   #+end_src
+** Activate org mode for *.org files
+   #+BEGIN_SRC emacs-lisp
+   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+   #+END_SRC
+** Press *C-c l* to add a file to the agenda
+   #+BEGIN_SRC emacs-lisp
+   (global-set-key "\C-cl" 'org-store-link)
+   #+END_SRC
+** Press *C-c a* to show the org-agenda menu
+   #+BEGIN_SRC emacs-lisp
+   (global-set-key "\C-ca" 'org-agenda)
+   #+END_SRC
+** Declare todo states
+   #+BEGIN_SRC emacs-lisp
+   (setq org-todo-keywords
+   '((sequence "TODO(t)" "START(s)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)" "DELEGATED(a)")))
+   #+END_SRC
+** Replace the ... as mark for folded blocks/notes
+   #+BEGIN_SRC emacs-lisp
+   (setq org-ellipsis "⤵")
+   #+END_SRC
+** Use syntax highlighting when editing source code blocks
+   #+BEGIN_SRC emacs-lisp
+   (setq org-src-fontify-natively t)
+   #+END_SRC
+** Make tabs behave in SRC blocks just like in the language's major mode
+   #+BEGIN_SRC emacs-lisp
+   (setq org-src-tab-acts-natively t)
+   #+END_SRC
+** Include calendar events, luna phases etc. into the org-agenda
+   #+BEGIN_SRC emacs-lisp
+   (setq org-agenda-include-diary t)
+   #+END_SRC
+** Pretty org bullets
+   #+BEGIN_SRC emacs-lisp
+   (use-package org-bullets
+     :config
+     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+   #+END_SRC
+* Programming
+** Shortcuts to compile and recompile
+   #+begin_src emacs-lisp
+   (global-set-key (kbd "C-c c") 'compile)
+   (global-set-key (kbd "C-c r") 'recompile)
+   #+end_src
+** Invoke `magit-status` by pressing "C-c m"
+   #+begin_src emacs-lisp
+   (global-set-key (kbd "C-c m") 'magit-status)
+   #+end_src
+** Languages
+*** Zig
+    #+BEGIN_SRC emacs-lisp
+    (use-package zig-mode
+      :config
+      (add-to-list 'auto-mode-alist '("\\.zig\\'" . zig-mode)))    
+    #+END_SRC
+*** Rust
+    #+begin_src emacs-lisp
+    (use-package rust-mode
+      :config
+      (add-hook 'rust-mode-hook (lambda () (setq indent-tabs-mode nil)))
+      (setq rust-format-on-save t))
+    #+end_src
+*** OCaml
+    #+begin_src emacs-lisp
+    ;(use-package tuareg-mode)
+    #+end_src
+*** Nim
+    #+begin_src emacs-lisp
+    (use-package nim-mode)
+    #+end_src    
+*** C++
+    #+begin_src emacs-lisp
+    (setq-default c-basic-offset 4)
+    #+end_src
+* Text editing
+** Tabs: Do not use them, tabs are evil!
+   When pressing TAB, insert a tab and then convert it into spaces:
+   #+begin_src emacs-lisp
+   (setq-default indent-tabs-mode nil)
+   (setq-default tab-width 4)
+   (setq indent-line-function 'insert-tab)
+   #+end_src
+** Close braces and other delimeters automatically
+   #+begin_src emacs-lisp
+   (electric-pair-mode 1)
+   #+end_src
+** Put all save files in a dedicated directory
+   #+begin_src emacs-lisp
+   (setq backup-directory-alist
+           `(("." . ,(concat user-emacs-directory "backups"))))
+   #+end_src
+** Move current line up or down using <M-p> or <M-n>
+   #+begin_src emacs-lisp
+   (use-package move-text
+     :config
+     (global-set-key (kbd "M-p") 'move-text-up)
+     (global-set-key (kbd "M-n") 'move-text-down))
+   #+end_src
+* Keybindings
+** Global
+   #+begin_src emacs-lisp
+   (global-set-key (kbd "C-,") 'other-window)
+   (org-defkey org-mode-map (kbd "C-,") 'other-window)
+   #+end_src
+

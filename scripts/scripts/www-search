@@ -1,0 +1,4 @@
+#!/bin/bash
+
+query=https://duckduckgo.com/\?t\=ffab\&q\=$("" | dmenu -i)
+firefox --new-tab ${query}

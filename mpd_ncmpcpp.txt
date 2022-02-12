@@ -1,0 +1,20 @@
+Remember to start mdp as user, not system-wide!
+It's easier to configure and has less overhead!
+
+If you do so, remember to also start it as a user:
+    systemctl --user enable mpd
+    systemctl --user start mpd
+So that it will use the user-specific config file.
+
+Sometimes mpd is already started or run as system service.
+If so, kill it with fire!
+    sudo systemctl stop mpd.socket
+    sudo systemctl stop mpd
+    sudo systemctl disable mpd.socket
+    sudo systemctl disable mpd
+    sudo killall mpd
+mpd.socket is a service that is able to restart mpd all the time, btw.
+
+Sources: 
+ https://www.reddit.com/r/archlinux/comments/cwkxhr/mpd_exception_no_database/,
+ answer by /u/Background_Sleep

@@ -1,0 +1,8 @@
+mod4+s
+  ./scripts/dmenu_school
+
+mod4+m
+  alacritty -e ncmpcpp
+
+mod4+b
+  firefox

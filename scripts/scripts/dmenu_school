@@ -1,0 +1,17 @@
+#!/bin/bash
+
+fach=$(ls ~/schulkram/Faecher/ | dmenu -i)
+templ=$(ls ~/schulkram/Templates/ | dmenu -i)
+
+datum=$(date +"ha_%d.%m.%y_")
+direct=${datum}${fach}_nerius
+pfad=~/schulkram/Faecher/${fach}/${direct}/
+
+mkdir $pfad
+cp ~/schulkram/Templates/${templ} ${pfad}/${direct}.tex
+
+# man kann leider vim nicht direkt in alacritty oeffnen und das working directory ebenfalls dorthin
+# wechseln
+#alacritty --working-directory ~/schulkram/Faecher/$fach/$name &
+
+emacs ${pfad}/${direct}.tex &
