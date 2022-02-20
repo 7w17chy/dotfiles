@@ -2,6 +2,7 @@ call plug#begin()
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'chriskempson/base16-vim'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " relative line numbers, with the current line number being the effective one
