@@ -49,6 +49,23 @@
      :config
      (which-key-mode 1))
    #+END_SRC
+** evil mode: add text processing capabilities
+   #+BEGIN_SRC emacs-lisp
+   (use-package evil
+     :config
+     (evil-mode 1))
+   #+END_SRC
+*** evil-surround: port of tpope's `vim-surround`
+   #+BEGIN_SRC emacs-lisp
+   (use-package evil-surround
+     :ensure t
+     :config
+     (global-evil-surround-mode 1))
+   #+END_SRC
+** magit: git integration
+   #+BEGIN_SRC emacs-lisp
+   (use-package magit)
+   #+END_SRC
 * Style
 ** Disable the menubar
    order matters: by putting 'tool-bar-mode 0' before 'menu-bar-mode 0', a black box
@@ -74,7 +91,7 @@
  ;;(set-frame-font "Hack 10")
  ;;(set-frame-font "Fira Code 10")
  ;;(set-frame-font "DejaVu Sans Mono 10")
- (set-frame-font "Office Code Pro 10") ;that one's pretty good!
+ ;(set-frame-font "Office Code Pro 10") ;that one's pretty good!
  ;;(set-frame-font "Fantasque Sans Mono 11")
  ;;(set-frame-font "Liberation Mono 10")
  ;;(set-frame-font "Source Code Pro 11")
@@ -192,6 +209,10 @@
    (use-package org-bullets
      :config
      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+   #+END_SRC
+** use evil mode
+   #+BEGIN_SRC emacs-lisp
+   (use-package org-evil)
    #+END_SRC
 * Programming
 ** Shortcuts to compile and recompile
