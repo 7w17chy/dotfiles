@@ -1,0 +1,7 @@
+#+title: Kuekenstall -- Planung
++date: 10.03.2022
+
+* Software
+** Temperatursensor:
+*** TODO Mit tokio nutzbar machen
+    Fuer Integrationshilfe siehe: [[https://github.com/rust-embedded/rust-sysfs-gpio][rust-sysfs-gpio]]

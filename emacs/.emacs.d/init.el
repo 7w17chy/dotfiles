@@ -12,7 +12,7 @@
    '("~/Dropbox/orgfiles/hausis.org" "~/Dropbox/orgfiles/agenda.org"))
  '(org-directory "~/Dropbox/orgfiles")
  '(package-selected-packages
-   '(fsharp-mode nim-mode which-key solarized-theme lua-mode use-package move-text magit tuareg haskell-mode gruber-darker-theme yaml-mode racer zig-mode all-the-icons rust-mode company evil-visual-mark-mode org-bullets go-mode base16-theme))
+   '(kotlin-mode org-evil evil fsharp-mode nim-mode which-key solarized-theme lua-mode use-package move-text magit tuareg haskell-mode gruber-darker-theme yaml-mode racer zig-mode all-the-icons rust-mode company evil-visual-mark-mode org-bullets go-mode base16-theme))
  '(smtpmail-smtp-server "mail.gmx.net")
  '(smtpmail-smtp-service 25))
 (custom-set-faces

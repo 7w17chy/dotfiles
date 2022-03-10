@@ -1,0 +1,19 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+# Your branch is ahead of 'github/master' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	modified:   emacs/.emacs.d/settings.org
+#
+# Changes not staged for commit:
+#	modified:   emacs/.emacs.d/init.el
+#
+# Untracked files:
+#	emacs/.emacs.d/elpa/
+#	emacs/.emacs.d/settings.el
+#	emacs/.emacs.d/transient/
+#
