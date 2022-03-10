@@ -5,9 +5,11 @@ Plug 'jiangmiao/auto-pairs'
 
 " GUI enhancements
 Plug 'chriskempson/base16-vim'
+Plug 'itchyny/lightline.vim'
 
 " Programming languages
 Plug 'rust-lang/rust.vim'
+Plug 'udalov/kotlin-vim'
 
 " Motion enhancements
 Plug 'justinmk/vim-sneak'
@@ -34,6 +36,24 @@ colorscheme base16-atelier-dune
 
 " set the gui font (neovide)
 set guifont=Noto\ Sans\ Mono:h9
+
+" Lightline (stolen from:
+" https://github.com/jonhoo/configs/blob/master/editor/.config/nvim/init.vim)
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileencoding', 'filetype' ] ],
+      \ },
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename'
+      \ },
+      \ }
+function! LightlineFilename()
+  return expand('%:t') !=# '' ? @% : '[No Name]'
+endfunction
 
 " fzf preview window position
 let g:fzf_layout = { 'down': '~20%' }
@@ -63,7 +83,7 @@ let g:rooter_patterns = ['.git', 'Makefile', '*.sln', 'build/env.sh']
 " stop echoing root dir
 let g:rooter_silent_chdir = 1
 
-" leader settings
+" leader mappings
 let mapleader = "\<Space>"
 nnoremap <Leader>o :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
