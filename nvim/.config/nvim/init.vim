@@ -79,7 +79,7 @@ augroup highlight_yank
 augroup END
 
 " teach rooter which files/dirs mark a project root dir
-let g:rooter_patterns = ['.git', 'Makefile', '*.sln', 'build/env.sh']
+let g:rooter_patterns = ['.git', 'README.*', 'Makefile', '*.sln', 'build/env.sh']
 " stop echoing root dir
 let g:rooter_silent_chdir = 1
 
