@@ -1,2 +1,2 @@
 setxkbmap -option caps:escape&
-exec i3
+exec xmonad
