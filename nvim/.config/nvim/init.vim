@@ -2,11 +2,11 @@ call plug#begin()
 " Editing enhancements
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+" required for table formatting
+Plug 'godlygeek/tabular'
 
 " note taking/markdown editing
 Plug 'preservim/vim-markdown'
-" required for table formatting
-Plug 'godlygeek/tabular'
 
 " GUI enhancements
 Plug 'chriskempson/base16-vim'
