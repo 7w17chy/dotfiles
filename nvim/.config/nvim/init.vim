@@ -29,6 +29,9 @@ call plug#end()
 " - https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 "
 
+" vim-markdown: disable folding
+let g:vim_markdown_folding_disabled = 1
+
 " relative line numbers, with the current line number being the effective one
 set relativenumber
 set number
