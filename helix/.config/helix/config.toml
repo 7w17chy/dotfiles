@@ -1,0 +1,10 @@
+theme = "base16-default-dark"
+
+[editor]
+line-number = "relative"
+mouse = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "block"
