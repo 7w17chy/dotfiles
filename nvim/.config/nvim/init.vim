@@ -4,6 +4,7 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 " required for table formatting
 Plug 'godlygeek/tabular'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " note taking/markdown editing
 Plug 'preservim/vim-markdown'
